@@ -24,6 +24,9 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
+import org.apache.log4j.*;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -38,6 +41,7 @@ public class ScoresList extends javax.swing.JFrame {
             return false;
         }
     };
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(ScoresList.class.getName());
 
     public ScoresList() throws ClassNotFoundException, FileNotFoundException, IOException, SQLException {
         initComponents();
@@ -47,7 +51,7 @@ public class ScoresList extends javax.swing.JFrame {
         ImageIcon myImg = new ImageIcon(bi);
         this.setIconImage(myImg.getImage());
         setVisible(true);
-        setSize(350,550);
+        setSize(350, 550);
         fillTable();
     }
 
@@ -150,11 +154,11 @@ public class ScoresList extends javax.swing.JFrame {
                 try {
                     new ScoresList().setVisible(true);
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(ScoresList.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR, "Class not found !!!");
                 } catch (IOException ex) {
-                    Logger.getLogger(ScoresList.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR, "Error in database connection !!!");
                 } catch (SQLException ex) {
-                    Logger.getLogger(ScoresList.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR, "Error in database !!!");
                 }
             }
         });
@@ -195,10 +199,10 @@ public class ScoresList extends javax.swing.JFrame {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Data Error");
         }
-        
+
         playerLbl.setText(ScoreController.getWinner());
         scoreLbl.setText(Integer.toString(ScoreController.getMaximumScore()));
-        
+
     }
 
     public void resizeColumnWidth(JTable table) {

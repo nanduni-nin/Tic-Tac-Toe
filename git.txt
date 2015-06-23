@@ -1,0 +1,29 @@
+[http]
+
+ proxy = http://cache.mrt.ac.lk:3128
+
+[https]
+
+ proxy = http://cache.mrt.ac.lk:3128
+
+
+git pull upstream master
+
+git add .
+git commit -a -m "My first commit from git workshop"
+git push origin master
+
+
+The project is online 
+https://github.com/Ruchiranga/ZETA-Blood-Bank-Management-System
+Everybody fork it and then use the git clone command to clone your forks to your laptops 
+git clone https://github.com/nanduni-nin/ZETA-Blood-Bank-Management-System.git
+
+git add upstream https://github.com/Ruchiranga/ZETA-Blood-Bank-Management-System.git
+
+
+command link
+https://drive.google.com/folderview?id=0B6-vox8-RlFYUXAybVRDR19UM0U&usp=drive_web&ddrp=1
+
+
+

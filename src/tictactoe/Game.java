@@ -15,6 +15,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import static tictactoe.TicTacToe.boxes;
+import org.apache.log4j.*;
+import java.io.*;
+import java.util.*;
 
 /**
  *
@@ -25,14 +28,15 @@ public class Game extends javax.swing.JFrame {
     /**
      * Creates new form Game
      */
-    String player1;
-    String player2;
-    int noOfPlayers;
-
-    int chance = 1;
-    Box[] boxes;
-    Board board = new Board();
-    boolean won = false;
+    private String player1;
+    private String player2;
+    private int noOfPlayers;
+    private int chance = 1;
+    private Box[] boxes;
+    private Board board = new Board();
+    private static boolean won = false;
+    private boolean cameOnce = false;
+    private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(Game.class.getName());
 
     /**
      * Creates new form GameInterface
@@ -383,11 +387,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -404,10 +410,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                       logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box31.setText(" ");
                 changePlayer();
@@ -426,11 +432,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -447,10 +455,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box32.setText(" ");
                 changePlayer();
@@ -470,11 +478,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -491,10 +501,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box33.setText(" ");
                 changePlayer();
@@ -508,16 +518,18 @@ public class Game extends javax.swing.JFrame {
                 if (won == false) {
                     box21.setText(" ");
                     setCrossBackGround(box21);
-                    boxes[8].changeClicked(1);
+                    boxes[3].changeClicked(1);
                     board.makeMove(1, 0, 1);
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -534,10 +546,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box21.setText(" ");
                 changePlayer();
@@ -557,11 +569,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -579,10 +593,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box22.setText(" ");
                 changePlayer();
@@ -601,11 +615,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -622,10 +638,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box23.setText(" ");
                 changePlayer();
@@ -644,9 +660,12 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
+                    }
+                    if (won) {
+                        return;
                     }
                     compMove();
                 }
@@ -664,10 +683,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
                 } catch (ClassNotFoundException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                 }
                 box12.setText(" ");
                 changePlayer();
@@ -675,6 +694,21 @@ public class Game extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_box12ActionPerformed
+
+    private void end() {
+
+        box11.setEnabled(false);
+        box12.setEnabled(false);
+        box13.setEnabled(false);
+        box21.setEnabled(false);
+        box22.setEnabled(false);
+        box23.setEnabled(false);
+        box31.setEnabled(false);
+        box32.setEnabled(false);
+        box33.setEnabled(false);
+        logger.log(org.apache.log4j.Level.INFO, "Game terminates");
+
+    }
 
     private void box13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box13ActionPerformed
         if (!box13.getText().equals(" ")) {
@@ -687,11 +721,13 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -709,10 +745,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                       logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box13.setText(" ");
                 changePlayer();
@@ -721,36 +757,36 @@ public class Game extends javax.swing.JFrame {
     }//GEN-LAST:event_box13ActionPerformed
 
     public void setCircleBackGround(JButton button) {
-        File imgfile = new File("D:\\java\\gui\\TicTacToe\\src\\images\\circle.png");
+        File imgfile = new File("..\\TicTacToe\\src\\images\\circle.png");
         FileInputStream imgStream = null;
         try {
             imgStream = new FileInputStream(imgfile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.ERROR,"File not found !!!");
         }
         BufferedImage bi = null;
         try {
             bi = ImageIO.read(imgStream);
         } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.DEBUG, "Error in input/output !!!");
         }
         ImageIcon myImg = new ImageIcon(bi);
         button.setIcon(myImg);
     }
 
     public void setCrossBackGround(JButton button) {
-        File imgfile = new File("D:\\java\\gui\\TicTacToe\\src\\images\\cross2.png");
+        File imgfile = new File("..\\TicTacToe\\src\\images\\cross2.png");
         FileInputStream imgStream = null;
         try {
             imgStream = new FileInputStream(imgfile);
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.ERROR,"File not found !!!");
         }
         BufferedImage bi = null;
         try {
             bi = ImageIO.read(imgStream);
         } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.DEBUG, "Error in input/output !!!");
         }
         ImageIcon myImg = new ImageIcon(bi);
         button.setIcon(myImg);
@@ -767,12 +803,14 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     } catch (SQLException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                     }
                     changePlayer();
-
+                    if (won) {
+                        return;
+                    }
                     compMove();
                 }
                 return;
@@ -789,10 +827,10 @@ public class Game extends javax.swing.JFrame {
                     try {
                         checkHit();
                     } catch (ClassNotFoundException ex) {
-                        Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                        logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
                     }
                 } catch (SQLException ex) {
-                    Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                    logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
                 }
                 box11.setText(" ");
                 changePlayer();
@@ -807,14 +845,14 @@ public class Game extends javax.swing.JFrame {
             try {
                 LogIn login = new LogIn();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(org.apache.log4j.Level.ERROR,"File not found !!!");
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+               logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
             } catch (SQLException ex) {
-                Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+                logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
             }
         } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.DEBUG, "Error in input/output !!!");
         }
 
     }//GEN-LAST:event_homeBtnActionPerformed
@@ -833,22 +871,32 @@ public class Game extends javax.swing.JFrame {
 
     private void playAgainBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playAgainBtnActionPerformed
         try {
-            this.setVisible(false);
+            this.dispose();
             Game game = new Game(player1, player2, noOfPlayers);
         } catch (IOException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.DEBUG, "Error in input/output !!!");
         }
     }//GEN-LAST:event_playAgainBtnActionPerformed
 
     public void recordVictory(String name, int marks) throws ClassNotFoundException, SQLException {
-        ScoreController.updateScore(name, marks);
+        System.out.println(name);
+        if (!name.equals("Computer")) {
+            ScoreController.updateScore(name, marks);
+        }
     }
 
     public boolean checkHit() throws ClassNotFoundException, SQLException {
-        for (int i = 0; i < 9; i++) {
-            System.out.print(boxes[i].getState() + "    ");
+        //jumbleBoard();
+        if (won) {
+            return true;
         }
-        System.out.println("Checking hit");
+        for (int i = 0; i < 9; i++) {
+            if (i % 3 == 0) {
+                //  System.out.println("");
+            }
+            //System.out.print(boxes[i].getState() + "    ");
+        }
+        //System.out.println("Checking hit");
         String name, other = null;
         if (noOfPlayers == 2) {
             if (chance == 1) {
@@ -859,7 +907,7 @@ public class Game extends javax.swing.JFrame {
                 other = player2;
             }
         } else {
-            if (chance == 2) {
+            if (chance == 1) {
                 name = player1;
             } else {
                 name = "Computer";
@@ -872,12 +920,15 @@ public class Game extends javax.swing.JFrame {
             box13.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[3].getState() == boxes[4].getState() && boxes[4].getState() == boxes[5].getState() && boxes[3].getState() > 0) {
 
@@ -886,11 +937,16 @@ public class Game extends javax.swing.JFrame {
             box23.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
+
+            jumbleBoard();
             return true;
         } else if (boxes[6].getState() == boxes[7].getState() && boxes[7].getState() == boxes[8].getState() && boxes[6].getState() > 0) {
 
@@ -899,12 +955,15 @@ public class Game extends javax.swing.JFrame {
             box33.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[0].getState() == boxes[3].getState() && boxes[3].getState() == boxes[6].getState() && boxes[0].getState() > 0) {
 
@@ -913,12 +972,15 @@ public class Game extends javax.swing.JFrame {
             box31.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[1].getState() == boxes[4].getState() && boxes[4].getState() == boxes[7].getState() && boxes[1].getState() > 0) {
 
@@ -927,12 +989,15 @@ public class Game extends javax.swing.JFrame {
             box32.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[2].getState() == boxes[5].getState() && boxes[5].getState() == boxes[8].getState() && boxes[2].getState() > 0) {
 
@@ -941,12 +1006,15 @@ public class Game extends javax.swing.JFrame {
             box33.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[0].getState() == boxes[4].getState() && boxes[4].getState() == boxes[8].getState() && boxes[0].getState() > 0) {
 
@@ -955,12 +1023,13 @@ public class Game extends javax.swing.JFrame {
             box33.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else if (boxes[2].getState() == boxes[4].getState() && boxes[4].getState() == boxes[6].getState() && boxes[2].getState() > 0) {
 
@@ -969,12 +1038,15 @@ public class Game extends javax.swing.JFrame {
             box31.setBackground(Color.MAGENTA);
             if (name.equals("Computer")) {
                 JOptionPane.showMessageDialog(null, "You Lost", "Over", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(player1, 0);
+                end();
             } else {
-                JOptionPane.showMessageDialog(null, "Well Done. " + name + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Well Done. " + player1 + " Won !!!", "Congradulations", JOptionPane.INFORMATION_MESSAGE);
+                recordVictory(name, 100);
+                recordVictory(other, 0);
+                end();
             }
-            recordVictory(name, 100);
-            recordVictory(other, 0);
-            won = true;
+            jumbleBoard();
             return true;
         } else {
             int count = 0;
@@ -986,8 +1058,12 @@ public class Game extends javax.swing.JFrame {
 
             if (count == 9) {
                 JOptionPane.showMessageDialog(null, "Draw !!!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-                recordVictory(player1, 0);
-                recordVictory(player2, 0);
+                if (noOfPlayers == 2) {
+                    recordVictory(player1, 0);
+                    recordVictory(player2, 0);
+                } else {
+                    recordVictory(player1, 0);
+                }
                 return false;
             }
             return false;
@@ -1040,7 +1116,7 @@ public class Game extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Game.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        logger.log(org.apache.log4j.Level.INFO, "\n****************** TIC TAC TOE ***************** \nGame starts!!!");
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1114,7 +1190,244 @@ public class Game extends javax.swing.JFrame {
                 }
             }
         }
+        //System.out.println("I J old " + I + " " + J);
+        if (boxes[0].getState() == 1 && boxes[8].getState() == 1 || boxes[2].getState() == 1 && boxes[6].getState() == 1) {
+            if (boxes[4].getState() == 2 && !cameOnce) {
+                if (boxes[1].getState() == -1) {
+                    I = 0;
+                    J = 1;
+                    cameOnce = true;
+                } else if (boxes[3].getState() == -1) {
+                    I = 1;
+                    J = 0;
+                    cameOnce = true;
+                } else if (boxes[5].getState() == -1) {
+                    I = 1;
+                    J = 2;
+                    cameOnce = true;
+                } else if (boxes[7].getState() == -1) {
+                    I = 2;
+                    J = 1;
+                    cameOnce = true;
+                }
 
+            }
+        }
+        //try not to loose part 2
+
+        if (boxes[3].getState() == boxes[8].getState() && boxes[3].getState() > 0) {
+            if (boxes[6].getState() == -1) {
+                I = 2;
+                J = 0;
+            } else if (boxes[7].getState() == -1) {
+                I = 2;
+                J = 1;
+            }
+        }
+
+        if (boxes[3].getState() == boxes[2].getState() && boxes[3].getState() > 0) {
+            if (boxes[0].getState() == -1) {
+                I = 0;
+                J = 0;
+            } else if (boxes[1].getState() == -1) {
+                I = 0;
+                J = 1;
+            }
+        }
+
+        if (boxes[5].getState() == boxes[6].getState() && boxes[5].getState() > 0) {
+            if (boxes[8].getState() == -1) {
+                I = 2;
+                J = 2;
+            } else if (boxes[7].getState() == -1) {
+                I = 2;
+                J = 1;
+            }
+        }
+
+        if (boxes[5].getState() == boxes[0].getState() && boxes[5].getState() > 0) {
+            if (boxes[2].getState() == -1) {
+                I = 0;
+                J = 2;
+            } else if (boxes[1].getState() == -1) {
+                I = 0;
+                J = 1;
+            }
+        }
+
+        if (boxes[1].getState() == boxes[6].getState() && boxes[1].getState() > 0) {
+            if (boxes[0].getState() == -1) {
+                I = 0;
+                J = 0;
+            } else if (boxes[3].getState() == -1) {
+                I = 1;
+                J = 0;
+            }
+        }
+
+        if (boxes[1].getState() == boxes[8].getState() && boxes[1].getState() > 0) {
+            if (boxes[2].getState() == -1) {
+                I = 0;
+                J = 2;
+            } else if (boxes[5].getState() == -1) {
+                I = 1;
+                J = 2;
+            }
+        }
+
+        if (boxes[7].getState() == boxes[0].getState() && boxes[7].getState() > 0) {
+            if (boxes[6].getState() == -1) {
+                I = 2;
+                J = 0;
+            } else if (boxes[3].getState() == -1) {
+                I = 1;
+                J = 0;
+            }
+        }
+
+        if (boxes[7].getState() == boxes[2].getState() && boxes[7].getState() > 0) {
+            if (boxes[8].getState() == -1) {
+                I = 2;
+                J = 2;
+            } else if (boxes[5].getState() == -1) {
+                I = 1;
+                J = 2;
+            }
+        }
+
+        //try not to loose
+        if (boxes[0].getState() == boxes[1].getState() && boxes[0].getState() == 1 || boxes[6].getState() == boxes[4].getState() && boxes[4].getState() == 1 || boxes[5].getState() == boxes[8].getState() && boxes[5].getState() == 1) {
+            if (boxes[2].getState() == -1) {
+                I = 0;
+                J = 2;
+            }
+        }
+
+        if (boxes[2].getState() == boxes[1].getState() && boxes[2].getState() == 1 || boxes[8].getState() == boxes[4].getState() && boxes[4].getState() == 1 || boxes[3].getState() == boxes[6].getState() && boxes[6].getState() == 1) {
+            if (boxes[0].getState() == -1) {
+                I = 0;
+                J = 0;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[2].getState() && boxes[0].getState() == 1 || boxes[7].getState() == boxes[4].getState() && boxes[4].getState() == 1) {
+            if (boxes[1].getState() == -1) {
+                System.out.println("Got here");
+                I = 0;
+                J = 1;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[6].getState() && boxes[0].getState() == 1 || boxes[4].getState() == boxes[5].getState() && boxes[4].getState() == 1) {
+            if (boxes[3].getState() == -1) {
+                I = 1;
+                J = 0;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[8].getState() && boxes[0].getState() == 1 || boxes[6].getState() == boxes[2].getState() && boxes[2].getState() == 1 || boxes[1].getState() == boxes[7].getState() && boxes[1].getState() == 1 || boxes[3].getState() == boxes[5].getState() && boxes[3].getState() == 1) {
+            if (boxes[4].getState() == -1) {
+                I = 1;
+                J = 1;
+            }
+        }
+
+        if (boxes[2].getState() == boxes[8].getState() && boxes[2].getState() == 1 || boxes[3].getState() == boxes[4].getState() && boxes[4].getState() == 1) {
+            if (boxes[5].getState() == -1) {
+                System.out.println("got here too");
+                I = 1;
+                J = 2;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[3].getState() && boxes[0].getState() == 1 || boxes[2].getState() == boxes[4].getState() && boxes[4].getState() == 1 || boxes[7].getState() == boxes[8].getState() && boxes[7].getState() == 1) {
+            if (boxes[6].getState() == -1) {
+                I = 2;
+                J = 0;
+            }
+        }
+
+        if (boxes[6].getState() == boxes[8].getState() && boxes[6].getState() == 1 || boxes[1].getState() == boxes[4].getState() && boxes[4].getState() == 1) {
+            if (boxes[7].getState() == -1) {
+                I = 2;
+                J = 1;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[4].getState() && boxes[0].getState() == 1 || boxes[6].getState() == boxes[7].getState() && boxes[7].getState() == 1 || boxes[5].getState() == boxes[2].getState() && boxes[5].getState() == 1) {
+            if (boxes[8].getState() == -1) {
+                I = 2;
+                J = 2;
+            }
+        }
+
+        //try to win
+        if (boxes[0].getState() == boxes[1].getState() && boxes[0].getState() == 2 || boxes[6].getState() == boxes[4].getState() && boxes[4].getState() == 2 || boxes[5].getState() == boxes[8].getState() && boxes[5].getState() == 2) {
+            if (boxes[2].getState() == -1) {
+                I = 0;
+                J = 2;
+            }
+        }
+
+        if (boxes[2].getState() == boxes[1].getState() && boxes[2].getState() == 2 || boxes[8].getState() == boxes[4].getState() && boxes[4].getState() == 2 || boxes[3].getState() == boxes[6].getState() && boxes[6].getState() == 2) {
+            if (boxes[0].getState() == -1) {
+                I = 0;
+                J = 0;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[2].getState() && boxes[0].getState() == 2 || boxes[7].getState() == boxes[4].getState() && boxes[4].getState() == 2) {
+            if (boxes[1].getState() == -1) {
+                System.out.println("Got here");
+                I = 0;
+                J = 1;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[6].getState() && boxes[0].getState() == 2 || boxes[4].getState() == boxes[5].getState() && boxes[4].getState() == 2) {
+            if (boxes[3].getState() == -1) {
+                I = 1;
+                J = 0;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[8].getState() && boxes[0].getState() == 2 || boxes[6].getState() == boxes[2].getState() && boxes[2].getState() == 2 || boxes[1].getState() == boxes[7].getState() && boxes[1].getState() == 2 || boxes[3].getState() == boxes[5].getState() && boxes[3].getState() == 2) {
+            if (boxes[4].getState() == -1) {
+                I = 1;
+                J = 1;
+            }
+        }
+
+        if (boxes[2].getState() == boxes[8].getState() && boxes[2].getState() == 2 || boxes[3].getState() == boxes[4].getState() && boxes[4].getState() == 2) {
+            if (boxes[5].getState() == -1) {
+                System.out.println("got here too");
+                I = 1;
+                J = 2;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[3].getState() && boxes[0].getState() == 2 || boxes[2].getState() == boxes[4].getState() && boxes[4].getState() == 2 || boxes[7].getState() == boxes[8].getState() && boxes[7].getState() == 2) {
+            if (boxes[6].getState() == -1) {
+                I = 2;
+                J = 0;
+            }
+        }
+
+        if (boxes[6].getState() == boxes[8].getState() && boxes[6].getState() == 2 || boxes[1].getState() == boxes[4].getState() && boxes[4].getState() == 2) {
+            if (boxes[7].getState() == -1) {
+                I = 2;
+                J = 1;
+            }
+        }
+
+        if (boxes[0].getState() == boxes[4].getState() && boxes[0].getState() == 2 || boxes[6].getState() == boxes[7].getState() && boxes[7].getState() == 2 || boxes[5].getState() == boxes[2].getState() && boxes[5].getState() == 2) {
+            if (boxes[8].getState() == -1) {
+                I = 2;
+                J = 2;
+            }
+        }
+
+        //System.out.println("I J " + I + " " + J);
         switch (I) {
             case 0:
                 switch (J) {
@@ -1175,12 +1488,15 @@ public class Game extends javax.swing.JFrame {
                 break;
 
         }
+        if (won) {
+            return;
+        }
         try {
             checkHit();
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.ERROR,"Class not found !!!");
         } catch (SQLException ex) {
-            Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(org.apache.log4j.Level.ERROR,"Error in database connection !!!");
         }
         changePlayer();
 
@@ -1211,4 +1527,10 @@ public class Game extends javax.swing.JFrame {
         return boards;
     }
 
+    private void jumbleBoard() {
+        for (int i = 0; i < 9; i++) {
+            //System.out.println("Jumbled");
+            boxes[i].changeClicked(-1);
+        }
+    }
 }

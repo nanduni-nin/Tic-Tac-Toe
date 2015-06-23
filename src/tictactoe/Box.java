@@ -5,9 +5,9 @@ package tictactoe;
  * @author Nands
  */
 public class Box {
-    int number;
+    private int number;
     int clicked;//clicked or not
-    int state; //crosss or circle cross1 circle 2
+    private int state; //crosss or circle cross1 circle 2
     
     public Box(int number){
         this.clicked = 0; //clicked
@@ -23,7 +23,7 @@ public class Box {
             else{
                 this.state=1;
             }            
-            System.out.println(number +"     "+  state);        
+           // System.out.println(number +"     "+  state);        
     }
     
     
